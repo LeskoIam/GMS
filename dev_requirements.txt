@@ -1,0 +1,7 @@
+Django==5.0.6
+
+# Development
+pre-commit==3.7.1
+pytest==8.2.1
+pytest-django==4.8.0
+ruff==0.4.6

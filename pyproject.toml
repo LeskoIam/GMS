@@ -1,0 +1,112 @@
+[project]
+name = "GMS - Garden Management System"
+readme = "README.md"
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "gms.settings"
+# -- recommended but optional:
+python_files = ["test_*.py", "*_test.py", "testing/python/*.py", "tests.py"]
+
+
+[tool.ruff]
+target-version = "py312"
+line-length = 121
+indent-width = 4
+
+# Exclude files
+#extend-exclude = ["setup.py"]
+exclude = ["migrations"]
+
+[tool.ruff.lint]
+# select = ["ALL"]
+select = [
+    # pycodestyle errors
+    "E",
+    # pycodestyle warnings
+    "W",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # pep8-naming
+    "N",
+    # mccabe
+    "C901",
+    # pydocstyle
+    # "D",
+    # flake8-pytest-style
+    "PT"
+]
+
+ignore = [
+    # Missing docstring in public module
+    "D100",
+    # Missing docstring in public class
+    "D101",
+    # Missing docstring in public package
+    "D104",
+    # Missing docstring in magic method
+    "D105",
+    # 1 blank line required before class docstring
+    "D203",
+    # 1 blank line required between summary line and description
+    "D205",
+    # Multi-line docstring summary should start at the second line
+    "D213",
+    # First line should end with a period
+    "D400",
+    "D401",
+    # Invalid module name
+    "N999",
+    # Unused import
+    "F401"
+]
+
+# Avoid trying to fix flake8-bugbear (`B`) violations
+unfixable = ["B"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+
+#[tool.mypy]
+#python_version = "3.12"
+#exclude = []
+
+## Start off with these
+#warn_unused_configs = true
+#warn_redundant_casts = true
+#warn_unused_ignores = true
+
+## Getting these passing should be easy
+# strict_equality = true
+# extra_checks = true
+
+## Strongly recommend enabling this one as soon as you can
+# check_untyped_defs = true
+
+## These shouldn't be too much additional work, but may be tricky to
+## get passing if you use a lot of untyped libraries
+# disallow_subclassing_any = true
+# disallow_untyped_decorators = true
+# disallow_any_generics = true
+
+## These next few are various gradations of forcing use of type annotations
+# disallow_untyped_calls = true
+# disallow_incomplete_defs = true
+# disallow_untyped_defs = true
+
+## This one isn't too hard to get passing, but return on investment is lower
+# no_implicit_reexport = true
+
+## This one can be tricky to get passing if you use a lot of untyped libraries
+# warn_return_any = true
