@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Garden, GardenBed, Plant, PlantPreset
+
+admin.site.register(Garden)
+admin.site.register(GardenBed)
+admin.site.register(Plant)
+admin.site.register(PlantPreset)
