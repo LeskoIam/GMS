@@ -1,0 +1,30 @@
+<h1>Garden Bed details</h1>
+
+<div>
+  <h2>{{ garden.name }}</h2>
+  <hr>
+<ul>
+    {% for bed in beds %}
+        <li><b>Bed Name:</b> {{ bed.name }}
+        <ul>
+            <li><b>Description:</b> {{ bed.description }}</li>
+            <li>{{ bed.location }}</li>
+        </ul>
+        </li>
+        <li><b>Description:</b> {{ bed.description }}</li>
+        <li><b>Plants:</b>
+            <ul>
+            {% for plant_bed, bed_plants in plants.items %} 
+                {% if bed.id == plant_bed.id and bed_plants|length > 0%}
+                    {% for plant in bed_plants %}
+                        <li>{{ plant }}</li>
+                        <li>{{ plant.location }}</li>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </li>
+        <hr>
+    {% endfor %}
+</ul>
+</div>

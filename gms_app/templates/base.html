@@ -1,0 +1,27 @@
+<!--{% load static %}-->
+
+<!-- main base.html -->
+<!DOCTYPE html>
+<html lang="{% block html_language_code %}en{% endblock %}" style="font-size: 15px;">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Garden{% endblock %} </title>
+  </head>
+  <body>
+    <div class="content-wrapper container" id="content">
+        {% block header %}{% endblock %}
+        
+        {% block sitenav %}{% endblock sitenav %}
+      
+        {% block appnav %}{% endblock appnav %}
+        
+        {% block content %}{% endblock content%}
+      
+        {% block footer %}
+            <h6>Footer</h6>
+        {% endblock footer%}
+      
+    </div>
+    
+  </body>
+</html>
