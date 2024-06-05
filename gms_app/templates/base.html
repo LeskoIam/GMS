@@ -1,27 +1,36 @@
 <!--{% load static %}-->
 
-<!-- main base.html -->
+
 <!DOCTYPE html>
-<html lang="{% block html_language_code %}en{% endblock %}" style="font-size: 15px;">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}Garden{% endblock %} </title>
-  </head>
-  <body>
-    <div class="content-wrapper container" id="content">
-        {% block header %}{% endblock %}
-        
-        {% block sitenav %}{% endblock sitenav %}
-      
-        {% block appnav %}{% endblock appnav %}
-        
-        {% block content %}{% endblock content%}
-      
-        {% block footer %}
-            <h6>Footer</h6>
-        {% endblock footer%}
-      
-    </div>
-    
-  </body>
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load django_bootstrap5  %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+<div class="container">
+{% block header %}{% endblock %}
+
+{% block sitenav %}
+    <ul class="nav bg-info">
+        <li class="nav-item">
+            <a class="nav-link link-light" href="{% url "garden_list" %}">Gardens</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link link-light" href="{% url "home" %}">Home</a>
+        </li>
+{#        <li class="nav-item">#}
+{#          <a class="nav-link link-light" href="/members">MEMBERS</a>#}
+{#        </li>#}
+    </ul>
+{% endblock sitenav %}
+{% block content %}{% endblock content%}
+{% block footer %}
+    <h6>Footer</h6>
+{% endblock footer%}
+</div>
+</body>
 </html>

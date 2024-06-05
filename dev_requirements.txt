@@ -1,9 +1,10 @@
-Django==5.0.6
+Django>=5.0.6
+django-bootstrap5
 
 # Development
 pre-commit==3.7.1
 # Testing
-pytest==8.2.1
+pytest==8.2.2
 pytest-django==4.8.0
 pytest-html==4.1.1
 # Linting / formating
