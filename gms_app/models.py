@@ -82,7 +82,7 @@ class Planting(models.Model):
     )
 
     def __str__(self):
-        return f"{self.plant.name} in {self.garden_bed.name}"
+        return f"{self.plant.name} in {self.garden_bed.name} at {self.location}"
 
     class Meta:
         unique_together = [["plant", "garden_bed", "location"]]
@@ -98,6 +98,6 @@ class PlantPreset(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Planting"
-        verbose_name_plural = "Plantings"
+        verbose_name = "Plant preset"
+        verbose_name_plural = "Plant presets"
         ordering = ["name"]
