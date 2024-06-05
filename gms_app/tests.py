@@ -3,7 +3,6 @@ import logging
 import pytest
 from django.db.utils import IntegrityError
 
-
 from gms_app.models import Garden, GardenBed, Plant, Planting
 
 log = logging.getLogger(__name__)
@@ -51,8 +50,6 @@ def test_number_of_plant_in_first_garden_bed():
     garden = Garden.objects.get(name="Test Garden")
     garden_bed = GardenBed.objects.filter(garden=garden).first()
     plants = garden_bed.plants.all()
-    assert len(plants) == 3
-    # or simply
     # assert garden_bed.plants.count() == 3
 
 
