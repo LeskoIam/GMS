@@ -24,7 +24,7 @@ def _prepare_db(django_db_setup, django_db_blocker):
         for plant_i in range(3):
             plant = Plant.objects.create(
                 name=f"Test Plant {plant_i}",
-                description=f"Test Plant Description{plant_i}",
+                description=f"Test Plant Description {plant_i}",
             )
             planting = Planting.objects.create(
                 plant=plant,
