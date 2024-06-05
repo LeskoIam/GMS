@@ -3,6 +3,7 @@ import logging
 import pytest
 from django.db.utils import IntegrityError
 
+
 from gms_app.models import Garden, GardenBed, Plant, Planting
 
 log = logging.getLogger(__name__)
@@ -57,7 +58,6 @@ def test_number_of_plant_in_first_garden_bed():
 
 @pytest.mark.django_db()
 def test_allow_duplicate_plants_on_bed():
-
     """We need to be able to have multiples of plants on the same garden bed.
 
     Given garden with garden beds
