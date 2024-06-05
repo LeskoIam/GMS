@@ -1,7 +1,6 @@
 import logging
 
 import pytest
-from django.db.utils import IntegrityError
 
 from gms_app.models import Garden, GardenBed, Plant, Planting
 
@@ -32,7 +31,7 @@ def _prepare_db(django_db_setup, django_db_blocker):
                 garden_bed=garden_bed,
                 location={"x": plant_i, "y": 0},
             )
-            log.info("\tAdded plant '%s'", plant.name)
+            log.info("\tAdded plant '%s' with planting '%s'", plant.name, planting)
 
 
 @pytest.mark.django_db()
@@ -49,15 +48,11 @@ def test_number_of_plant_in_first_garden_bed():
     """Number of plants for garden bed is correct."""
     garden = Garden.objects.get(name="Test Garden")
     garden_bed = GardenBed.objects.filter(garden=garden).first()
-    plants = garden_bed.plants.all()
-    assert len(plants) == 3
-    # or simply
-    # assert garden_bed.plants.count() == 3
+    assert garden_bed.plants.count() == 3
 
 
 @pytest.mark.django_db()
 def test_allow_duplicate_plants_on_bed():
-
     """We need to be able to have multiples of plants on the same garden bed.
 
     Given garden with garden beds
