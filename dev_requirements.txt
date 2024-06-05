@@ -1,5 +1,5 @@
 Django>=5.0.6
-django-bootstrap-v5
+django-bootstrap5
 
 # Development
 pre-commit==3.7.1
