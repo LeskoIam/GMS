@@ -23,7 +23,6 @@ jobs:
         with:
           name: test-results
           path: |
-            report.html
-#            test_log.log
+            tests/test_run_results/
 
           retention-days: 5
