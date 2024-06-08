@@ -177,4 +177,4 @@ cython_debug/
 # For pyenv
 .python-version
 
-/tests/test_run_results
+/tests/test_run_results/
