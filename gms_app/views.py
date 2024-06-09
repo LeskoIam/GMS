@@ -20,6 +20,7 @@ class GardenDetailView(View):
     # dartmouth.objects.filter(student__first_name='william')  # returns all Dartmouth students named William
 
     def get(self, request, *args, **kwargs):
+        """Show "tree view" for given Garden."""
         pk = kwargs["pk"]
         garden = Garden.objects.get(pk=pk)
         beds = GardenBed.objects.filter(garden=garden)

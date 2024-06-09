@@ -1,7 +1,12 @@
+import logging
 import os
 from datetime import datetime
 
 import pytest
+
+from gms_app.models import Garden, GardenBed, Plant
+
+log = logging.getLogger(__name__)
 
 
 ####################################
@@ -43,3 +48,49 @@ def pytest_configure(config):
 
     config.option.htmlpath = os.path.join(test_run_subdir, f"report_{test_run_datetime}.html")
     config.option.log_file = os.path.join(test_run_subdir, f"log_{test_run_datetime}.log")
+
+
+############
+# Fixtures #
+############
+
+
+@pytest.fixture(scope="session", autouse=True)  # Fails with scope="module" ?
+def _prepare_db(django_db_setup, django_db_blocker):
+    """Set up non-modified objects used by all test methods"""
+    with django_db_blocker.unblock():
+        # Create 1 Garden
+        garden = Garden.objects.create(
+            name="Test Garden",
+            description="Test Garden Description",
+        )
+
+        # Create 2 GardenBeds
+        garden_bed_0 = GardenBed.objects.create(
+            garden=garden,
+            name="Test Garden Bed 1",
+            description="Test Garden Bed Description 1",
+        )
+        garden_bed_1 = GardenBed.objects.create(
+            garden=garden,
+            name="Test Garden Bed 2",
+            description="Test Garden Bed Description 2",
+        )
+        log.info("\tGarden '%s' - garden_bed_0 '%s'", garden.name, garden_bed_0.name)
+        log.info("\tGarden '%s' - garden_bed_1 '%s'", garden.name, garden_bed_1.name)
+
+        # Create 2 Plants
+        plant_0 = Plant.objects.create(
+            name="Test Plant 1",
+            description="Test Plant Description 1",
+        )
+        plant_1 = Plant.objects.create(
+            name="Test Plant 2",
+            description="Test Plant Description 2",
+        )
+        log.info("\t\tAdded plant_0 '%s'", plant_0.name)
+        log.info("\t\tAdded plant_1 '%s'", plant_1.name)
+
+        # Add plant_0 to garden_bed_0
+        garden_bed_0.add_plant(plant_0, location={"x": 0, "y": 0})
+        log.info("\t\tAdded plant_0 '%s' to '%s'", plant_0.name, garden_bed_0)
