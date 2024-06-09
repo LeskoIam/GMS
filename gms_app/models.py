@@ -34,14 +34,24 @@ class GardenBed(models.Model):
         verbose_name_plural = "Garden Beds"
         ordering = ["name"]
 
-    def add_plant(self, plant, location):
+    def add_plant(self, plant: "Plant", location: dict[str : int | float, str : int | float]) -> "Planting":
+        """Add Plant to this GardenBed.
+
+        :param plant: Plant to be added.
+        :param location: Where the plant is located on this garden bed.
+        :return: Planting object.
+        """
         return Planting.objects.create(
             plant=plant,
             garden_bed=self,
             location=location,
         )
 
-    def get_plantings(self):
+    def get_plantings(self) -> "Planting":
+        """Get Planting objects for this GardenBed.
+
+        :return: Planting objects for this GardenBed.
+        """
         return Planting.objects.filter(garden_bed=self)
 
 
