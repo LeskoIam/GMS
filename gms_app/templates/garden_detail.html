@@ -26,11 +26,12 @@
                   </ul>
                   <b>Plants:</b>
                     <ul>
-                    {% for plant_bed, bed_plants in plants.items %}
-                        {% if bed.id == plant_bed.id and bed_plants|length > 0%}
-                            {% for plant in bed_plants %}
-                                <li>{{ plant }}</li>
-                                <li>{{ plant.location }}</li>
+                    {% for plant_bed, bed_plantings in plantings.items %}
+                        {% if bed.id == plant_bed.id and bed_plantings|length > 0%}
+                            {% for planting in bed_plantings %}
+                                <li>{{ planting }}</li>
+                                <li>{{ planting.location }}</li>
+                                <li>{{ planting.plant.description }}</li>
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
