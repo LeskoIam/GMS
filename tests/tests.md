@@ -1,6 +1,7 @@
 # Tests
 
 ## Test database data setup
+Test database is configured with a `_prepare_db()` fixture in `/tests/conftest.py` file.
 ```mermaid
 classDiagram
     Garden : name Test Garden
