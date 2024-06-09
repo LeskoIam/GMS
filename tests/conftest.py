@@ -35,6 +35,7 @@ def pytest_html_report_title(report):
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
+    """Configure pytest test run."""
     report_base_dir = "tests/test_run_results"
     test_run_datetime = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
     test_run_subdir = os.path.join(report_base_dir, f"run_{test_run_datetime}")
