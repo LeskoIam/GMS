@@ -70,7 +70,7 @@ def test_allow_duplicate_plants_on_bed():
     """We need to be able to have multiples of plants on the same garden bed.
 
     Given garden with garden beds
-      And garden bed has one "Test Plant 1" plant already
+      And garden bed has one "Test Plant 1" plant already at location (0, 0)
     When we add another "Test Plant 1" plant on the same garden bed but at different location
     Then it should add the plant to the garden bed
     """

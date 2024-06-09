@@ -14,6 +14,7 @@ jobs:
           args: "check --output-format=github"
 
       - name: Ruff-format
+        if: always()
         uses: chartboost/ruff-action@v1
         with:
           args: 'format --check'
