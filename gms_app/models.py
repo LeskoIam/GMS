@@ -41,6 +41,9 @@ class GardenBed(models.Model):
             location=location,
         )
 
+    def get_plantings(self):
+        return Planting.objects.filter(garden_bed=self)
+
 
 class Plant(models.Model):
     """Represents the Plant "type" that can exist outside of a plant bed"""

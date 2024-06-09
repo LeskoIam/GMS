@@ -23,8 +23,8 @@ class GardenDetailView(View):
         pk = kwargs["pk"]
         garden = Garden.objects.get(pk=pk)
         beds = GardenBed.objects.filter(garden=garden)
-        plants = {bed: Plant.objects.filter(garden_bed=bed) for bed in beds}
-        return render(request, "garden_detail.html", {"garden": garden, "beds": beds, "plants": plants})
+        plantings = {bed: bed.get_plantings() for bed in beds}
+        return render(request, "garden_detail.html", {"garden": garden, "beds": beds, "plantings": plantings})
 
 
 # class AddPlantView(FormView):
