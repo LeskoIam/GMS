@@ -75,6 +75,11 @@ class Plant(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        """Also save PlantPreset if entered plant is not already present in PlantPreset table."""
+        super().save(*args, **kwargs)
+        PlantPreset.objects.get_or_create(name=self.name, defaults={"description": self.description})
+
     class Meta:
         verbose_name = "Plant"
         verbose_name_plural = "Plants"

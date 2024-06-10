@@ -3,7 +3,7 @@ import logging
 import pytest
 from django.db.utils import IntegrityError
 
-from gms_app.models import Garden, GardenBed, Plant, Planting
+from gms_app.models import Garden, GardenBed, Plant, Planting, PlantPreset
 
 log = logging.getLogger(__name__)
 
@@ -75,3 +75,21 @@ def test_one_location_can_only_have_one_plant():
     with pytest.raises(IntegrityError):
         new_planting = garden_bed.add_plant(plant, location)
     log.info(new_planting)
+
+
+@pytest.mark.django_db()
+def test_adding_plant_adds_plant_preset():
+    """We want to also save PlantPreset if entered plant is not already present in PlantPreset table.
+
+    # Given garden with garden beds
+    #   And garden bed has one "Test Plant 1" plant at location (0, 0) already
+    When we add new "Test Plant 42" plant to the Plant table
+    Then same Plant must be added to PlantPreset table
+    """
+    plant = Plant.objects.create(
+        name="Test Plant 44",
+        description="Test Plant Description 44",
+    )
+    log.info("Plant to add: %s\n", plant)
+
+    assert PlantPreset.objects.filter(name=plant.name, description=plant.description).count() == 1
