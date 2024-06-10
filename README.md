@@ -5,13 +5,17 @@
 Garden Management System
 
 * garden planing
-  * draw your garden
+  * input your garden
+    * garden beds
+    * plants
 * tracking of progress
+  * diary stile note taking
 * automation
   * reminders
   * automatic watering and ...?
 * weather
+* AI
 * ...
 
-
-<img alt="ui_basic_idea_01" height="351" src="docs/ui_basic_idea_01.png" width="590"/>
+## Links
+- [Ideas](docs/ideas.md)

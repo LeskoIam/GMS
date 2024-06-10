@@ -5,20 +5,26 @@ erDiagram
         string description
     }
     GardenBed {
-        garden Garden FK
+        Garden garden FK
         string name
         string description
     }
     Plant {
-        gardenbed GardenBed FK
         string name
         string description
+        garden_bed GardenBed FK
+    }
+    Planting {
+        Plant plant FK
+        GardenBed gardenBed FK
+        json location
     }
     PlantPreset {
         string name
         string description
     }
 
-    Garden ||--|{ GardenBed: ""
-    GardenBed }|--|{ Plant: ""
+    Garden ||--o{ GardenBed: ""
+    GardenBed }|--o{ Planting: ""
+    Planting }|--o{ Plant: ""
 ```
