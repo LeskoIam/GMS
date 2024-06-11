@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import FormView, ListView, TemplateView, View
 
+from gms_app.forms import AddPlantForm
 from gms_app.models import Garden, GardenBed, Plant
 
 
@@ -28,16 +29,17 @@ class GardenDetailView(View):
         return render(request, "garden_detail.html", {"garden": garden, "beds": beds, "plantings": plantings})
 
 
-# class AddPlantView(FormView):
-#     template_name = "add_plant_form.html"
-#     form_class = AddPlantForm
-#     success_url = "/garden/garden"
-#
-#     def form_valid(self, form):
-#         """This method is called when valid form data has been posted
-#         Returns:
-#             HttpResponse
-#         """
-#         p = Plant(name=form.cleaned_data["plant_name"], description=form.cleaned_data["plant_description"])
-#         p.save()
-#         return super().form_valid(form)
+class AddPlantView(FormView):
+    template_name = "forms/add_plant_form.html"
+    form_class = AddPlantForm
+    success_url = "/garden/garden"
+
+    def form_valid(self, form):
+        """Called when valid form data has been posted
+        Returns:
+            HttpResponse
+        """
+        p = Plant(name=form.cleaned_data["name"], description=form.cleaned_data["description"])
+        p.save()
+        print(form.cleaned_data["add_plant_to_planting"])  # TODO: Act on it #24
+        return super().form_valid(form)

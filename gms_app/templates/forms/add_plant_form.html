@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <h1>Add Plant</h1>
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        {{ form.description }}
+    </div>
+    <div class="form-check">
+{#        {{ form.save_plant_preset }} {{ form.save_plant_preset.label }}<br>#}
+        {{ form.add_plant_to_planting }} {{ form.add_plant_to_planting.label }}
+    </div>
+    <p>
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </p>
+</form>
+
+{% endblock content %}
