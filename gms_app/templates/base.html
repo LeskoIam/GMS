@@ -22,11 +22,12 @@
         <li class="nav-item">
             <a class="nav-link link-light" href="{% url "home" %}">Home</a>
         </li>
-{#        <li class="nav-item">#}
-{#          <a class="nav-link link-light" href="/members">MEMBERS</a>#}
-{#        </li>#}
+        <li class="nav-item">
+          <a class="nav-link link-light" href="{% url "add_plant" %}">Add Plant</a>
+        </li>
     </ul>
 {% endblock sitenav %}
+<hr>
 {% block content %}{% endblock content%}
 {% block footer %}
     <h6>Footer</h6>
