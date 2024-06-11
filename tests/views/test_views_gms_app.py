@@ -12,15 +12,17 @@ from gms_app.models import Garden, GardenBed, Plant, Planting
 log = logging.getLogger(__name__)
 
 
-@pytest.mark.parametrize(("viewname", "kwargs_"), [("home", {}), ("garden_list", {}), ("garden_detail", {"pk": 1})])
+@pytest.mark.parametrize(
+    ("view_name", "kwargs_"), [("home", {}), ("garden_list", {}), ("garden_detail", {"pk": 1}), ("add_plant", {})]
+)
 @pytest.mark.django_db()
-def test_view_loads(client, viewname, kwargs_):
+def test_view_loads(client, view_name, kwargs_):
     """We want to know if basic views load without error.
 
-    :param viewname: name of the view to test
+    :param view_name: name of the view to test
     :param kwargs_: any required arguments like primary key (PK)
     """
-    log.info("Testing view '%s' with kwargs_ '%s'", viewname, kwargs_)
-    uri = reverse(viewname, kwargs=kwargs_ if kwargs_ else None)
+    log.info("Testing view '%s' with kwargs_ '%s'", view_name, kwargs_)
+    uri = reverse(view_name, kwargs=kwargs_ if kwargs_ else None)
     resp = client.get(uri)
     assert resp.status_code == 200
