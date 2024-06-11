@@ -13,16 +13,28 @@ log = logging.getLogger(__name__)
 
 
 @pytest.mark.parametrize(
-    ("view_name", "kwargs_"), [("home", {}), ("garden_list", {}), ("garden_detail", {"pk": 1}), ("add_plant", {})]
+    ("view_name", "heading", "kwargs_"),
+    [
+        ("home", "GMS home", {}),
+        ("garden_list", "List of Gardens", {}),
+        ("garden_detail", "Garden details", {"pk": 1}),
+        ("add_plant", "Add Plant", {}),
+    ],
 )
 @pytest.mark.django_db()
-def test_view_loads(client, view_name, kwargs_):
+def test_view_loads(client, view_name, heading, kwargs_):
     """We want to know if basic views load without error.
 
     :param view_name: name of the view to test
+    :param heading: heading of the view
     :param kwargs_: any required arguments like primary key (PK)
     """
-    log.info("Testing view '%s' with kwargs_ '%s'", view_name, kwargs_)
     uri = reverse(view_name, kwargs=kwargs_ if kwargs_ else None)
+    log.info("Testing view '%s' with heading '%s' and kwargs_ '%s'. <uri: %s>", view_name, heading, kwargs_, uri)
+
     resp = client.get(uri)
+
     assert resp.status_code == 200
+
+    log.info("Heading '%s' in view source", heading)
+    assert heading in resp.content.decode()
