@@ -74,7 +74,6 @@ def test_one_location_can_only_have_one_plant():
     garden_bed = GardenBed.objects.get(garden=garden, name="Test Garden Bed 1")
     with pytest.raises(IntegrityError):
         new_planting = garden_bed.add_plant(plant, location)
-    log.info(new_planting)
 
 
 @pytest.mark.django_db()
