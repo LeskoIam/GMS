@@ -103,7 +103,7 @@ class Planting(models.Model):
         return f"{self.plant.name} in {self.garden_bed.name} at {self.location}"
 
     class Meta:
-        unique_together = [["plant", "garden_bed", "location"]]
+        unique_together = [["garden_bed", "location"]]
         verbose_name = "Planting"
         verbose_name_plural = "Plantings"
 
