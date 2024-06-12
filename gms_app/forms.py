@@ -34,5 +34,4 @@ class AddPlantForm(ModelForm):
                     "placeholder": "Enter your plant description",
                 }
             ),
-            # "save_preset_plant": BooleanField(initial=True, required=False),
         }

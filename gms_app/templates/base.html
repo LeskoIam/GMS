@@ -28,7 +28,20 @@
     </ul>
 {% endblock sitenav %}
 <hr>
-{% block content %}{% endblock content%}
+{% block errors %}
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <p > {{ error }} </p>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+{% endblock errors %}
+
+<div class="content">
+    {% block content %}
+    {% endblock content%}
+</div>
 {% block footer %}
     <h6>Footer</h6>
 {% endblock footer%}

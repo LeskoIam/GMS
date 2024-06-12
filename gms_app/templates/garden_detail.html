@@ -14,11 +14,11 @@
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <b>Bed Name:</b> {{ bed.name }}
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ forloop.counter }}" aria-expanded="true" aria-controls="collapseOne{{ forloop.counter }}">
+                  <b>Bed Name:&nbsp;</b> {{ bed.name }}
               </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div id="collapseOne{{ forloop.counter }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div class="accordion-body">
                   <ul>
                       <li><b>Description:</b> {{ bed.description }}</li>
@@ -30,8 +30,8 @@
                         {% if bed.id == plant_bed.id and bed_plantings|length > 0%}
                             {% for planting in bed_plantings %}
                                 <li>{{ planting }}</li>
-                                <li>{{ planting.location }}</li>
-                                <li>{{ planting.plant.description }}</li>
+                                <li>---- {{ planting.location }}</li>
+                                <li>---- {{ planting.plant.description }}</li>
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
