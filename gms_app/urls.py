@@ -11,4 +11,5 @@ urlpatterns = [
     path("garden/", views.GardenListView.as_view(), name="garden_list"),
     path("garden/<int:pk>/", views.GardenDetailView.as_view(), name="garden_detail"),
     path("garden/addplant/", views.AddPlantView.as_view(), name="add_plant"),
+    path("garden/addplanttobed/", views.AddPlantToGardenBedView.as_view(), name="add_plant_to_bed"),
 ]
