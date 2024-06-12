@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, reverse
 from django.views.generic import FormView, ListView, TemplateView, View
 
-from gms_app.forms import AddPlantForm
-from gms_app.models import Garden, GardenBed, Plant
+from gms_app.forms import AddPlantForm, AddPlantToGardenBedForm
+from gms_app.models import Garden, GardenBed, Plant, Planting
 
 
 # Create your views here.
@@ -42,4 +43,25 @@ class AddPlantView(FormView):
         p = Plant(name=form.cleaned_data["name"], description=form.cleaned_data["description"])
         p.save()
         print(form.cleaned_data["add_plant_to_planting"])  # TODO: Act on it #24
+        if form.cleaned_data["add_plant_to_planting"]:
+            return HttpResponseRedirect(reverse("add_plant_to_bed"))
+        return super().form_valid(form)
+
+
+class AddPlantToGardenBedView(FormView):
+    template_name = "forms/add_plant_to_garden_bed_form.html"
+    form_class = AddPlantToGardenBedForm
+    success_url = "/garden/garden"
+
+    def form_valid(self, form):
+        """Called when valid form data has been posted
+        Returns:
+            HttpResponse
+        """
+        p = Planting(
+            plant=form.cleaned_data["plant"],
+            garden_bed=form.cleaned_data["garden_bed"],
+            location=form.cleaned_data["location"],
+        )
+        p.save()
         return super().form_valid(form)

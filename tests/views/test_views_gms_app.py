@@ -19,6 +19,7 @@ log = logging.getLogger(__name__)
         ("garden_list", "List of Gardens", {}),
         ("garden_detail", "Garden details", {"pk": 1}),
         ("add_plant", "Add Plant", {}),
+        ("add_plant_to_bed", "Add Plant to Garden Bed", {}),
     ],
 )
 @pytest.mark.django_db()
