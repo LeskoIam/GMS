@@ -7,9 +7,16 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     <div class="mb-3">
+        {% if  form.name.errors %}
+            {% for error in form.name.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+            {% endfor %}
+        {% endif %}
         {{ form.name }}
     </div>
     <div class="mb-3">
