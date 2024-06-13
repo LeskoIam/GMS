@@ -7,19 +7,40 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" novalidate>
     {% csrf_token %}
     <div class="mb-3">
         <label class="form-label"><b>Add {{ form.plant.label }} ... </b></label>
+        {% if  form.plant.errors %}
+            {% for error in form.plant.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+            {% endfor %}
+        {% endif %}
         {{ form.plant }}
     </div>
     <div class="mb-3">
         <label class="form-label"><b>to {{ form.garden_bed.label }}</b></label>
+        {% if  form.garden_bed.errors %}
+            {% for error in form.garden_bed.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+            {% endfor %}
+        {% endif %}
         {{ form.garden_bed }}
     </div>
     <div class="mb-3">
         <label class="form-label"><b>in {{ form.location.label }} ... </b></label>
         <br>
+        {% if  form.location.errors %}
+            {% for error in form.location.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+            {% endfor %}
+        {% endif %}
         {{ form.location }}
     </div>
         <input class="btn btn-primary" type="submit" value="Submit">

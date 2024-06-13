@@ -4,50 +4,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  {% load django_bootstrap5  %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
+    <title>{% block title %}{% endblock %}</title>
+    {% load django_bootstrap5  %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
 <div class="container">
-{% block header %}{% endblock %}
+    {% block header %}{% endblock %}
 
-{% block sitenav %}
-    <ul class="nav bg-info">
-        <li class="nav-item">
-            <a class="nav-link link-light" href="{% url "garden_list" %}">Gardens</a>
-        </li>
+    {% block sitenav %}
+        <ul class="nav bg-info">
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url "garden_list" %}">Gardens</a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link link-light" href="{% url "home" %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-light" href="{% url "add_plant" %}">Add Plant</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-light" href="{% url "add_plant_to_bed" %}">Add Plant To Garden Bed</a>
-        </li>
-    </ul>
-{% endblock sitenav %}
-<hr>
-{% block errors %}
-    {% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-            <p > {{ error }} </p>
-        {% endfor %}
-    {% endfor %}
-{% endif %}
-{% endblock errors %}
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url "home" %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link-light" href="{% url "add_plant" %}">Add Plant</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link-light" href="{% url "add_plant_to_bed" %}">Add Plant To Garden Bed</a>
+            </li>
+        </ul>
+    {% endblock sitenav %}
 
-<div class="content">
-    {% block content %}
-    {% endblock content%}
-</div>
-{% block footer %}
-    <h6>Footer</h6>
-{% endblock footer%}
+    <hr>
+
+    <div class="content">
+        {% block content %}
+        {% endblock content%}
+    </div>
+    {% block footer %}
+        <h6>Footer</h6>
+    {% endblock footer%}
 </div>
 </body>
 </html>
