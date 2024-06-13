@@ -56,10 +56,10 @@ class GardenBed(models.Model):
 
 
 class Plant(models.Model):
-    """Represents the Plant "type" that can exist outside of a plant bed"""
+    """Represents the Plant "type" that can exist outside a plant bed."""
 
     # The name being unique causes a unique constraint error if we do a direct
-    # many to many relationship with the garden bed
+    # many-to-many relationship with the garden bed
     name = models.CharField(
         max_length=50, unique=True, verbose_name="Plant Name", help_text="Enter the name of the plant"
     )

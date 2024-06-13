@@ -17,10 +17,6 @@ class GardenListView(ListView):
 
 
 class GardenDetailView(View):
-    # dartmouth = GardenBed.objects.get(garden_id=)
-    # dartmouth.student_set.all()  # returns all students at Dartmouth
-    # dartmouth.objects.filter(student__first_name='william')  # returns all Dartmouth students named William
-
     def get(self, request, *args, **kwargs):
         """Show "tree view" for given Garden."""
         pk = kwargs["pk"]
@@ -42,7 +38,6 @@ class AddPlantView(FormView):
         """
         p = Plant(name=form.cleaned_data["name"], description=form.cleaned_data["description"])
         p.save()
-        print(form.cleaned_data["add_plant_to_planting"])  # TODO: Act on it #24
         if form.cleaned_data["add_plant_to_planting"]:
             return HttpResponseRedirect(reverse("add_plant_to_bed"))
         return super().form_valid(form)
