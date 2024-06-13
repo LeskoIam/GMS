@@ -62,6 +62,7 @@ class AddPlantToGardenBedView(FormView):
             plant=form.cleaned_data["plant"],
             garden_bed=form.cleaned_data["garden_bed"],
             location=form.cleaned_data["location"],
+            planting_date=form.cleaned_data["planting_date"],
         )
         p.save()
         return super().form_valid(form)

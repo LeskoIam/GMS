@@ -3,7 +3,7 @@
 # When it's bad, it's better than nothing.
 # When it lies to you, it may be a while before you realize something's wrong.
 
-from django.forms import BooleanField, CheckboxInput, ChoiceField, ModelForm, Select, Textarea, TextInput
+from django.forms import BooleanField, CheckboxInput, DateInput, ModelForm, Select, Textarea, TextInput
 
 from .models import Plant, Planting
 
@@ -36,9 +36,10 @@ class AddPlantForm(ModelForm):
 class AddPlantToGardenBedForm(ModelForm):
     class Meta:
         model = Planting
-        fields = ["plant", "garden_bed", "location"]
+        fields = ["plant", "garden_bed", "planting_date", "location"]
         widgets = {
             "plant": Select(attrs={"class": "form-select", "size": "7", "aria-label": "size 7 select example"}),
             "garden_bed": Select(attrs={"class": "form-select", "size": "4", "aria-label": "size 4 select example"}),
+            "planting_date": DateInput(attrs={"type": "date"}),
         }
         # attrs={"class": "form-select", "size": "7", "multiple": None, "aria-label": "multiple size 7 select example"}
