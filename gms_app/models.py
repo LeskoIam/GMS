@@ -98,6 +98,9 @@ class Planting(models.Model):
     location = models.JSONField(
         default=dict, help_text="Enter the location of the plant in the garden bed as a JSON object"
     )
+    planting_date = models.DateField(
+        verbose_name="Planting date", help_text="Enter the date of the planting", blank=True, null=True
+    )
 
     def __str__(self):
         return f"{self.plant.name} in {self.garden_bed.name} at {self.location}"
