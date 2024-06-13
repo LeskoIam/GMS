@@ -1,3 +1,5 @@
+[![ruff](https://github.com/LeskoIam/GMS/actions/workflows/ruff.yml/badge.svg?branch=master)](https://github.com/LeskoIam/GMS/actions/workflows/ruff.yml)
+[![tests](https://github.com/LeskoIam/GMS/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/LeskoIam/GMS/actions/workflows/tests.yml)
 # GMS
 
 Garden Management System
