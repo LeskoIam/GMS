@@ -16,9 +16,15 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+
+from gms_app.views import api_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("garden/", include("gms_app.urls")),
+    # REST
+    re_path(r"^api/gardens/$", api_views.garden_list),
+    re_path(r"^api/beds/$", api_views.garden_bed_list),
+    re_path(r"^api/plants/$", api_views.plant_list),
 ]
