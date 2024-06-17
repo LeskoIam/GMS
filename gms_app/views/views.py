@@ -6,7 +6,6 @@ from gms_app.forms import AddPlantForm, AddPlantToGardenBedForm
 from gms_app.models import Garden, GardenBed, Plant, Planting
 
 
-# Create your views here.
 class GardenHomeView(TemplateView):
     template_name = "home.html"
 
