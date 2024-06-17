@@ -15,7 +15,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ forloop.counter }}" aria-expanded="true" aria-controls="collapseOne{{ forloop.counter }}">
-                  <b>Bed Name:&nbsp;</b> {{ bed.name }}
+                  <b>Bed Name:&nbsp;</b> {{ bed.name }} {{ bed.location }}
               </button>
             </h2>
             <div id="collapseOne{{ forloop.counter }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -27,7 +27,7 @@
                   <b>Plants:</b>
                     <ul>
                     {% for plant_bed, bed_plantings in plantings.items %}
-                        {% if bed.id == plant_bed.id and bed_plantings|length > 0%}
+                        {% if bed.id == plant_bed.id and bed_plantings|length > 0 %}
                             {% for planting in bed_plantings %}
                                 <li>{{ planting }}</li>
                                 <li>---- {{ planting.location }}</li>

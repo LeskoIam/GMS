@@ -25,6 +25,9 @@ class GardenBed(models.Model):
     )
     name = models.CharField(max_length=100, verbose_name="Bed Name", help_text="Enter the name of the garden bed")
     description = models.TextField(blank=True, help_text="Enter a brief description of the garden bed")
+    location = models.JSONField(
+        default=dict, help_text="Enter the location of the garden bed in garden as a JSON object"
+    )
 
     def __str__(self):
         return self.name
