@@ -1,18 +1,14 @@
-import React, {Component} from "react";
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
 
-class Header extends Component {
-    render() {
-        return (
-            <header className="App-header">
-                <div className="text-center">
-                    <h1>GMS</h1>
-                    <hr/>
-                    <h2>Garden Management System</h2>
-                </div>
-            </header>
-        );
-    }
+export default function Header() {
+  return (
+    <Navbar bg="light" sticky="top" className="Header">
+      <Container>
+        <Navbar.Brand>GMS</Navbar.Brand>
+      </Container>
+    </Navbar>
+  );
 }
 
 
-export default Header;
