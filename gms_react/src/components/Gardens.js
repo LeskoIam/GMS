@@ -20,11 +20,9 @@ export default function Gardens() {
         <ul>
           {gardens.map(garden => {
             return (
-              <p key={garden.id}>
-                <b>{garden.id}</b> &mdash; {garden.name}
-                <br/>
-                {garden.description}
-              </p>
+              <li key={garden.id}>
+                <b>{garden.id}</b> &mdash; {garden.name} &mdash; {garden.description}
+              </li>
             );
           })}
         </ul>
