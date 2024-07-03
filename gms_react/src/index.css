@@ -50,3 +50,27 @@ code {
 .Sidebar a:visited {
   color: #444;
 }
+
+
+.Content {
+  margin-top: 10px;
+}
+
+.Garden {
+  align-items: start;
+  padding-top: 50px;
+  border-bottom: 1px solid #eee;
+}
+
+.Garden:hover {
+  background-color: #f8f8f8;
+}
+
+.Garden a {
+  color: #14c;
+  text-decoration: none;
+}
+
+.Garden a:visited {
+  color: #14c;
+}
