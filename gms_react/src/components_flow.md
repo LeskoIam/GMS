@@ -7,7 +7,7 @@ Head["components/Header.js"]
 Body["components/Body.js"]
 Gardens["components/Gardens.js"]
 Sidebar["components/Sidebar.js"]
-
+Garden["components/Garden.js"]
 
 GardenPage["pages/GardenPage.js"]
 AboutPage["pages/AboutPage.js"]
@@ -18,11 +18,12 @@ App --> GardenPage
 App --> AboutPage
 App --> LoginPage
 
-GardenPage --> Body --> Sidebar
+GardenPage -- Sidebar? yes --> Body --> Sidebar
 Body --> Gardens
+Gardens --> Garden
 
-AboutPage --> Body
+AboutPage -- Sidebar? yes --> Body
 
-LoginPage --> Body
+LoginPage -- Sidebar? no --> Body
 
 ```
