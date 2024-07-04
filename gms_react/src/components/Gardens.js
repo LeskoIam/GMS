@@ -33,7 +33,7 @@ export default function Gardens() {
               {gardens.length === 0 ?
                 <p>There are no blog posts.</p>
               :
-                gardens.map(garden => <Garden key={garden.id} garden={garden} />)
+                gardens.map(garden => <Garden key={garden.pk} garden={garden} />)
               }
             </>
           }
