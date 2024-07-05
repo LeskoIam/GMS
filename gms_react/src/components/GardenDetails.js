@@ -46,7 +46,7 @@ export default function GardenDetails() {
                     <Accordion.Item key={index} eventKey={index.toString()}>
                       <Accordion.Header>
                         <Stack direction="horizontal" gap={3} className="GardenBedHeader">
-                          <div className="p-2">{bed.name}</div>
+                          <div className="p-2">{bed.name}<br/>{bed.description}</div>
                           <div className="p-2 ms-auto">{<Button variant="primary">Add Note to GardenBed</Button>}</div>
                         </Stack>
                       </Accordion.Header>

@@ -1,9 +1,33 @@
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models import QuerySet
+
+
+class Note(models.Model):
+    GENERAL = "G"
+    PLANT_MAINTENANCE = "PM"
+    PLANT_HEALTH = "PH"
+    CATEGORIES = (
+        (GENERAL, "General"),
+        (PLANT_MAINTENANCE, "Plant Maintenance"),
+        (PLANT_HEALTH, "Plant Health"),
+    )
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey("content_type", "object_id")
+
+    text = models.TextField(blank=True, help_text="Enter note text")
+    category = models.CharField(
+        max_length=3, choices=CATEGORIES, verbose_name="Note Category", help_text="Enter note category"
+    )
+    date = models.DateTimeField(verbose_name="Date of the Note", help_text="Enter the date of the note", null=True)
 
 
 class Garden(models.Model):
     name = models.CharField(max_length=50, verbose_name="Garden Name", help_text="Enter the name of the garden")
     description = models.TextField(blank=True, help_text="Enter a brief description of the garden")
+    note = GenericRelation(Note)
 
     def __str__(self):
         return self.name
@@ -50,7 +74,7 @@ class GardenBed(models.Model):
             location=location,
         )
 
-    def get_plantings(self) -> "Planting":
+    def get_plantings(self) -> QuerySet:
         """Get Planting objects for this GardenBed.
 
         :return: Planting objects for this GardenBed.
@@ -88,7 +112,7 @@ class Plant(models.Model):
         super().save(*args, **kwargs)
         PlantPreset.objects.get_or_create(name=self.name, defaults={"description": self.description})
 
-    def get_plantings(self, garden_bed: GardenBed, location) -> "Planting":
+    def get_plantings(self, garden_bed: GardenBed, location) -> QuerySet:
         """Get Planting objects for this Plant.
 
         :return: Planting objects for this Plant.
