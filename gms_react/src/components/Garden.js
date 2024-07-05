@@ -13,7 +13,7 @@ export default function Garden({ garden }) {
             {garden.name}
           </Link>
           &nbsp;&mdash;&nbsp;
-          {garden.name}:
+          {garden.pk}:
         </p>
         <p>{garden.description}</p>
       </div>

@@ -27,4 +27,6 @@ urlpatterns = [
     re_path(r"^api/gardens/$", api_views.garden_list),
     re_path(r"^api/beds/$", api_views.garden_bed_list),
     re_path(r"^api/plants/$", api_views.plant_list),
+    path("api/garden/<int:pk>/", api_views.garden_details),
+    # re_path(r"^api/garden/$", api_views.garden_details),
 ]

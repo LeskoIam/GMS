@@ -3,7 +3,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from gms_app.models import Garden, GardenBed, Plant, Planting
-from gms_app.serializers import GardenBedSerializer, GardenSerializer, PlantSerializer
+from gms_app.serializers import (
+    GardenBedSerializer,
+    GardenDetailsSerializer,
+    GardenSerializer,
+    PlantSerializer,
+)
 
 
 @api_view(["GET", "POST"])
@@ -61,3 +66,15 @@ def plant_list(request) -> Response:
             return Response(status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+def garden_details(request, pk) -> Response:
+    """List of all Plants."""
+    if request.method == "GET":
+        garden = Garden.objects.filter(pk=pk)
+        if garden.exists():
+            serializer = GardenDetailsSerializer(garden.first(), context={"request": request})
+
+            return Response(serializer.data)
+        return Response(status=status.HTTP_404_NOT_FOUND)

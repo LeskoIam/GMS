@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import GardensPage from "./pages/GardensPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
-import GardenPage from "./pages/GardenPage";
+import GardenDetailsPage from "./pages/GardenDetailsPage";
 
 
 
@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/" />} />
-          <Route path="/garden/:key" element={<GardenPage />} />
+          <Route path="/garden/:key" element={<GardenDetailsPage />} />
         </Routes>
       </BrowserRouter>
     </Container>

@@ -55,7 +55,7 @@ class GardenBed(models.Model):
 
         :return: Planting objects for this GardenBed.
         """
-        return Planting.objects.filter(garden_bed=self)
+        return self.plantings.filter(garden_bed=self)
 
 
 class Plant(models.Model):
@@ -87,6 +87,14 @@ class Plant(models.Model):
         """Also save PlantPreset if entered plant is not already present in PlantPreset table."""
         super().save(*args, **kwargs)
         PlantPreset.objects.get_or_create(name=self.name, defaults={"description": self.description})
+
+    def get_plantings(self, garden_bed: GardenBed, location) -> "Planting":
+        """Get Planting objects for this Plant.
+
+        :return: Planting objects for this Plant.
+        """
+        pl = self.plantings.filter(plant=self, garden_bed=garden_bed, location=location)
+        return pl
 
 
 class Planting(models.Model):

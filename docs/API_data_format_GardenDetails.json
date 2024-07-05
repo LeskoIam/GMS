@@ -1,0 +1,63 @@
+{
+    "pk": 1,
+    "name": "Test Garden",
+    "description": "desc",
+    "garden_beds": [
+        {
+            "name": "greda_01",
+            "description": "",
+            "location": {},
+            "plants": [
+                {
+                    "pk": 1,
+                    "name": "Berivka",
+                    "description": "Solata",
+                    "location": "TODO"
+                },
+                {
+                    "pk": 3,
+                    "name": "Brokoli",
+                    "description": "To je brokoli in je super.",
+                    "location": "TODO"
+                },
+                {
+                    "pk": 20,
+                    "name": "Fižol",
+                    "description": "Plezajoči",
+                    "location": "TODO"
+                },
+                {
+                    "pk": 21,
+                    "name": "Sončnica",
+                    "description": "Lepa rumena.",
+                    "location": "TODO"
+                }
+            ]
+        },
+        {
+            "name": "greda_02",
+            "description": "druga greda",
+            "location": {},
+            "plants": [
+                {
+                    "pk": 3,
+                    "name": "Brokoli",
+                    "description": "To je brokoli in je super.",
+                    "location": "TODO"
+                },
+                {
+                    "pk": 3,
+                    "name": "Brokoli",
+                    "description": "To je brokoli in je super.",
+                    "location": "TODO"
+                },
+                {
+                    "pk": 20,
+                    "name": "Fižol",
+                    "description": "Plezajoči",
+                    "location": "TODO"
+                }
+            ]
+        }
+    ]
+}

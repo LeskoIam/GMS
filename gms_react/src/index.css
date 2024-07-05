@@ -74,3 +74,22 @@ code {
 .Garden a:visited {
   color: #14c;
 }
+
+.Plant {
+  align-items: start;
+  padding-top: 50px;
+  border-bottom: 1px solid #eee;
+}
+
+.Plant:hover {
+  background-color: #f8f8f8;
+}
+
+.Plant a {
+  color: #14c;
+  text-decoration: none;
+}
+
+.Plant a:visited {
+  color: #14c;
+}
