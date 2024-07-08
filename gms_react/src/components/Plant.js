@@ -1,6 +1,6 @@
-import Stack from 'react-bootstrap/Stack';
-import Image from 'react-bootstrap/Image';
-import {Link} from 'react-router-dom';
+// import Stack from 'react-bootstrap/Stack';
+// import Image from 'react-bootstrap/Image';
+// import {Link} from 'react-router-dom';
 import {Card} from "react-bootstrap";
 import {Button} from "react-bootstrap";
 
