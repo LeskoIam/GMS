@@ -93,3 +93,8 @@ code {
 .Plant a:visited {
   color: #14c;
 }
+
+.InputField {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

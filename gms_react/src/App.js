@@ -6,6 +6,7 @@ import GardensPage from "./pages/GardensPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import GardenDetailsPage from "./pages/GardenDetailsPage";
+import RegistrationPage from "./pages/RegistrationPage";
 
 
 
@@ -18,8 +19,9 @@ export default function App() {
           <Route path="/" element={<GardensPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/register" element={<RegistrationPage />} />
           <Route path="/garden/:key" element={<GardenDetailsPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </Container>
