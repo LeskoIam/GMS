@@ -4,24 +4,44 @@ from django.db import models
 from django.db.models import QuerySet
 
 
-class Note(models.Model):
-    GENERAL = "G"
-    PLANT_MAINTENANCE = "PM"
-    PLANT_HEALTH = "PH"
-    CATEGORIES = (
-        (GENERAL, "General"),
-        (PLANT_MAINTENANCE, "Plant Maintenance"),
-        (PLANT_HEALTH, "Plant Health"),
+class NoteCategory(models.Model):
+    name = models.CharField(
+        max_length=32, verbose_name="Note category name", help_text="Enter note category name", unique=True
     )
+    acronym = models.CharField(
+        max_length=3, verbose_name="Acronym", help_text="Enter note category acronym", unique=True
+    )
+    description = models.CharField(
+        max_length=127,
+        verbose_name="Note category description",
+        help_text="Enter note category description",
+        unique=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Note category"
+        verbose_name_plural = "Note categories"
+        ordering = ["name"]
+
+
+class Note(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey("content_type", "object_id")
 
+    title = models.CharField(max_length=32, verbose_name="Note title", help_text="Enter note title")
     text = models.TextField(blank=True, help_text="Enter note text")
-    category = models.CharField(
-        max_length=3, choices=CATEGORIES, verbose_name="Note Category", help_text="Enter note category"
-    )
-    date = models.DateTimeField(verbose_name="Date of the Note", help_text="Enter the date of the note", null=True)
+    date = models.DateTimeField(verbose_name="Date of the note", help_text="Enter the date of the note", null=True)
+    category = models.ManyToManyField(NoteCategory, related_name="notes", blank=True, help_text="Select note category")
+
+    class Meta:
+        verbose_name = "Note"
+        verbose_name_plural = "Notes"
+        ordering = ["title"]
 
 
 class Garden(models.Model):
