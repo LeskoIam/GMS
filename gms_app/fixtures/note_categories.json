@@ -1,0 +1,29 @@
+[
+{
+  "model": "gms_app.notecategory",
+  "pk": 1,
+  "fields": {
+    "name": "General",
+    "acronym": "GEN",
+    "description": "General notes."
+  }
+},
+{
+  "model": "gms_app.notecategory",
+  "pk": 2,
+  "fields": {
+    "name": "Test",
+    "acronym": "TST",
+    "description": "Test category."
+  }
+},
+{
+  "model": "gms_app.notecategory",
+  "pk": 3,
+  "fields": {
+    "name": "Plant care",
+    "acronym": "PLTCR",
+    "description": "Plant care notes."
+  }
+}
+]
