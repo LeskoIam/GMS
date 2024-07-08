@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -9,7 +11,7 @@ class NoteCategory(models.Model):
         max_length=32, verbose_name="Note category name", help_text="Enter note category name", unique=True
     )
     acronym = models.CharField(
-        max_length=3, verbose_name="Acronym", help_text="Enter note category acronym", unique=True
+        max_length=5, verbose_name="Acronym", help_text="Enter note category acronym", unique=True
     )
     description = models.CharField(
         max_length=127,
@@ -19,29 +21,37 @@ class NoteCategory(models.Model):
         blank=True,
     )
 
+    class Meta:
+        verbose_name = "Note Category"
+        verbose_name_plural = "Note Categories"
+        ordering = ["acronym"]
+
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = "Note category"
-        verbose_name_plural = "Note categories"
-        ordering = ["name"]
-
 
 class Note(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey("content_type", "object_id")
+    foreign_table = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, help_text="Select on which model to place note"
+    )
+    # Key (Id) of the row in `content_type` table
+    foreign_table_key = models.PositiveIntegerField(help_text="Input key (id) of the data in foreign_table")
+    content_object = GenericForeignKey("foreign_table", "foreign_table_key")
 
     title = models.CharField(max_length=32, verbose_name="Note title", help_text="Enter note title")
     text = models.TextField(blank=True, help_text="Enter note text")
-    date = models.DateTimeField(verbose_name="Date of the note", help_text="Enter the date of the note", null=True)
+    date = models.DateTimeField(
+        default=datetime.now, verbose_name="Date of the note", help_text="Enter the date of the note", null=True
+    )
     category = models.ManyToManyField(NoteCategory, related_name="notes", blank=True, help_text="Select note category")
 
     class Meta:
         verbose_name = "Note"
         verbose_name_plural = "Notes"
-        ordering = ["title"]
+        ordering = ["date"]
+
+    def __str__(self):
+        return f"{self.title} on {self.foreign_table} - {self.foreign_table_key}"
 
 
 class Garden(models.Model):
@@ -49,13 +59,18 @@ class Garden(models.Model):
     description = models.TextField(blank=True, help_text="Enter a brief description of the garden")
     note = GenericRelation(Note)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = "Garden"
         verbose_name_plural = "Gardens"
         ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+    # def add_note(self, title, text, date, category):
+    #     Note.objects.create(
+    #         foreign_table=self, foreign_table_key=self.pk, title=title, text=text, date=date, category=category
+    #     )
 
 
 class GardenBed(models.Model):
