@@ -5,6 +5,7 @@ import Body from '../components/Body';
 import InputField from '../components/forms/InputField';
 import { useApi } from '../contexts/ApiProvider';
 import { useNavigate } from 'react-router-dom';
+import { useFlash } from '../contexts/FlashProvider';
 
 
 export default function RegistrationPage() {
@@ -14,7 +15,9 @@ export default function RegistrationPage() {
   const passwordField = useRef();
   const password2Field = useRef();
   const navigate = useNavigate();
+
   const api = useApi();
+  const flash = useFlash();
 
   useEffect(() => {
     usernameField.current.focus();
@@ -36,6 +39,7 @@ export default function RegistrationPage() {
       }
       else {
         setFormErrors({});
+        flash('You have successfully registered!', 'success');
         navigate('/login');
       }
     }
