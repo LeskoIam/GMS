@@ -23,8 +23,30 @@ erDiagram
         string name
         string description
     }
+    
+    Note {
+        ContentType foreign_table FK
+        int foreign_table_key FK
+        string title
+        string text
+        datetime date
+        NoteCategory category
+    }
+    
+    NoteCategory {
+        string name
+        string acronym
+        string description
+    }
+    
+    Any {
+        any table
+    }
 
     Garden ||--o{ GardenBed: ""
     GardenBed }|--o{ Planting: ""
     Planting }|--o{ Plant: ""
+    
+    Note }|--o{ NoteCategory: ""
+    Note }o--o{ Any: ""
 ```
