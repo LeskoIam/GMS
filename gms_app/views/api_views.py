@@ -8,6 +8,7 @@ from gms_app.serializers import (
     GardenDetailsSerializer,
     GardenSerializer,
     PlantSerializer,
+    UserSerializer,
 )
 
 
@@ -78,3 +79,15 @@ def garden_details(request, pk) -> Response:
 
             return Response(serializer.data)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(["POST"])
+def register_user(request):
+    """Register new user."""
+    if request.method == "POST":
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
