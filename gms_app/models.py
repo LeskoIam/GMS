@@ -31,12 +31,12 @@ class NoteCategory(models.Model):
 
 
 class Note(models.Model):
-    foreign_table = models.ForeignKey(
+    content_type = models.ForeignKey(
         ContentType, on_delete=models.CASCADE, help_text="Select on which model to place note"
     )
-    # Key (Id) of the row in `content_type` table
-    foreign_table_key = models.PositiveIntegerField(help_text="Input key (id) of the data in foreign_table")
-    content_object = GenericForeignKey("foreign_table", "foreign_table_key")
+    # Key (Id) of the row in `object_id` table
+    object_id = models.PositiveIntegerField(help_text="Input key (id) of the data in foreign_table")
+    content_object = GenericForeignKey("content_type", "object_id")
 
     title = models.CharField(max_length=32, verbose_name="Note title", help_text="Enter note title")
     text = models.TextField(blank=True, help_text="Enter note text")
@@ -51,7 +51,7 @@ class Note(models.Model):
         ordering = ["date"]
 
     def __str__(self):
-        return f"{self.title} on {self.foreign_table} - {self.foreign_table_key}"
+        return f"{self.title} on {self.content_type} - {self.object_id}"
 
 
 class Garden(models.Model):
@@ -67,10 +67,12 @@ class Garden(models.Model):
     def __str__(self):
         return self.name
 
-    # def add_note(self, title, text, date, category):
-    #     Note.objects.create(
-    #         foreign_table=self, foreign_table_key=self.pk, title=title, text=text, date=date, category=category
-    #     )
+    def add_note(self, title, text, date=None, category=None, acronym=None, description=None):
+        """Add note to this Garden"""
+        # if category is not None:
+        #     category = NoteCategory.objects.create(name=category, acronym=acronym, description=description)
+
+        self.note.create(title=title, text=text, date=date)
 
 
 class GardenBed(models.Model):
