@@ -47,7 +47,6 @@ export default function GardenDetails() {
                       <Accordion.Header>
                         <Stack direction="horizontal" gap={3} className="GardenBedHeader">
                           <div className="p-2">{bed.name}<br/>{bed.description}</div>
-                          <div className="p-2 ms-auto">{<Button variant="primary">Add Note to GardenBed</Button>}</div>
                         </Stack>
                       </Accordion.Header>
                       {bed.plants.length === 0 ?
@@ -56,11 +55,12 @@ export default function GardenDetails() {
                         </Accordion.Body>
                         :
                         <Accordion.Body>
+                          <p>{<Button variant="primary">Add Note to GardenBed</Button>}</p>
                           <Stack direction="horizontal" gap={3} className="Plant">
-                          {bed.plants.map((plant, i) => (
-                            <Plant key={i} plant={plant}/>
-                          ))}
-                            </Stack>
+                            {bed.plants.map((plant, i) => (
+                              <Plant key={i} plant={plant}/>
+                            ))}
+                          </Stack>
                         </Accordion.Body>
                       }
                     </Accordion.Item>
