@@ -5,7 +5,7 @@ export default function InputField(
 ) {
   return (
     <Form.Group controlId={name} className="InputField">
-      {label && <Form.Label>{label}</Form.Label>}
+      {label && <Form.Label>{label}</Form.Label>}  {/* label is omitted if the label prop was not passed by the parent component */}
       <Form.Control
         type={type || 'text'}
         placeholder={placeholder}
