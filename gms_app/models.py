@@ -26,6 +26,17 @@ class NoteCategory(models.Model):
         verbose_name_plural = "Note Categories"
         ordering = ["acronym"]
 
+    def save(self, *args, **kwargs):
+        """
+
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        if self.acronym is None:
+            print("acronym is None", self.acronym)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
@@ -43,7 +54,9 @@ class Note(models.Model):
     date = models.DateTimeField(
         default=datetime.now, verbose_name="Date of the note", help_text="Enter the date of the note", null=True
     )
-    category = models.ManyToManyField(NoteCategory, related_name="notes", blank=True, help_text="Select note category")
+    category = models.ManyToManyField(
+        NoteCategory, related_name="notes", blank=True, help_text="Select note category", null=True
+    )
 
     class Meta:
         verbose_name = "Note"
@@ -51,7 +64,7 @@ class Note(models.Model):
         ordering = ["date"]
 
     def __str__(self):
-        return f"{self.title} on {self.content_type} - {self.object_id}"
+        return f"{self.pk}-{self.title} on {self.content_type} - {self.object_id}"
 
 
 class Garden(models.Model):
@@ -67,12 +80,33 @@ class Garden(models.Model):
     def __str__(self):
         return self.name
 
-    def add_note(self, title, text, date=None, category=None, acronym=None, description=None):
-        """Add note to this Garden"""
-        # if category is not None:
-        #     category = NoteCategory.objects.create(name=category, acronym=acronym, description=description)
+    def add_note(self, title, text, date=None, category: None | NoteCategory | str = None, **kwargs) -> Note:
+        """Add note to this Garden.
 
-        self.note.create(title=title, text=text, date=date)
+        :param title: Note title
+        :param text: Note text
+        :param date: Date of the note
+        :param category: None - Note without category
+                         type<NoteCategory> - add category to note
+                         type<str> - add category to note. Must supply description and/or acronym in kwargs
+        :param kwargs: Acronym and description. If acronym is not given it is generated automatically based on
+                       what is given in category parameter.
+        """
+        if isinstance(category, str):
+            description = kwargs.get("description")
+            acronym = kwargs.get("acronym")
+            if acronym is None:
+                acronym = category.replace(" ", "").upper()
+            _category = NoteCategory.objects.filter(name=category)
+            if _category.exists():
+                category = _category[0]
+            else:
+                category = NoteCategory.objects.create(name=category, acronym=acronym, description=description)
+
+        note = self.note.create(title=title, text=text, date=date)
+        if isinstance(category, NoteCategory):
+            note.category.set([category])
+        return note
 
 
 class GardenBed(models.Model):
