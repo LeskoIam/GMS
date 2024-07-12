@@ -8,7 +8,7 @@ from .models import Garden, GardenBed, Plant, Planting
 class GardenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Garden
-        fields = ("pk", "name", "description")
+        fields = ("pk", "name", "description", "note")
 
 
 class GardenBedSerializer(serializers.ModelSerializer):

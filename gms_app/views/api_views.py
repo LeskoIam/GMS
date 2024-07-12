@@ -81,6 +81,12 @@ def garden_details(request, pk) -> Response:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
+@api_view(["GET"])
+def notes_list(request) -> Response:
+    if request.method == "GET":
+        pass
+
+
 @api_view(["POST"])
 def register_user(request):
     """Register new user."""
